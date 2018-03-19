@@ -1,0 +1,10 @@
+<div class="content">
+  <input type="checkbox" class="checkbox" [checked]="todo.completed" (change)="editTodo(editInput.value, todo.id, !todo.completed)">
+  <input id="contentInput" type="text" #editInput value="{{ todo.content }}"
+    [readonly]="!todo.edit"
+    (click)="todo.edit = !todo.edit"
+     (blur)="editTodo(editInput.value, todo.id, todo.completed)"
+    class="form-control-plaintext form-control-lg">
+</div>
+
+<button (click)="removeTodo(todo.id)" class="btn btn-danger">x</button>

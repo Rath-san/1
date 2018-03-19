@@ -1,0 +1,2 @@
+<input type="text" placeholder="title" #content (keydown)="addOnEnter($event, content.value)" class="form-control">
+<button type="submit" (click)="createTodo(content.value)" class="btn btn-primary">make todo</button>
