@@ -4,12 +4,14 @@ import { Observable } from 'rxjs/observable';
 import 'rxjs/add/operator/map';
 import { HttpClient } from '@angular/common/http';
 import { MainService } from './main.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthenticationService {
-  public token;
 
-  api = 'https://todomachineapi.herokuapp.com/';
+  token;
+
+  api = environment.api;
 
   constructor(
     private _http: HttpClient
@@ -23,8 +25,8 @@ export class AuthenticationService {
       .map((r: any) => {
         const token = r;
         if (token) {
-          this.token = token;
-          localStorage.setItem(`todoMachine.user`, JSON.stringify({ username: username, token: token.token }));
+          this.token = token.token;
+          localStorage.setItem(`todoMachine.user`, JSON.stringify({ username: username, token: this.token }));
           return true;
         } else {
           return false;

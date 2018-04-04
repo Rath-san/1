@@ -5,17 +5,16 @@ import { Subject } from 'rxjs/Subject';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { SearchService } from './search.service';
 import { AuthenticationService } from './authentication.service';
+import { environment } from '../../environments/environment';
 
 
 @Injectable()
 export class MainService {
 
-  headers = new HttpHeaders()
-    .set('Content-Type', 'application/json')
-    .set('Authorization', 'JWT ' + (this._authServie.token.token));
+  headers: HttpHeaders;
 
-  api = 'https://todomachineapi.herokuapp.com/';
-  // apiRoot = 'api/todo/';
+  api = environment.api;
+  apiRoot = this.api + 'api/todo/';
 
   paginationOptions;
 
@@ -30,7 +29,8 @@ export class MainService {
     private _http: HttpClient,
     private _searchService: SearchService,
     private _authServie: AuthenticationService,
-  ) { }
+  ) {
+  }
 
   clearToDos() {
     const clearedToDo = this.toDos.filter((x: ToDo) => {
@@ -38,11 +38,18 @@ export class MainService {
         this.removeEntry(x.id);
       }
     });
-    // this.getData();
+  }
+
+  constructHeaders(): HttpHeaders {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Authorization', 'JWT ' + this._authServie.token);
+    return headers;
   }
 
   getData() {
-    const headers = this.headers;
+    this.headers = this.constructHeaders();
+
     let params = new HttpParams();
 
     if (this._searchService.query) {
@@ -58,7 +65,7 @@ export class MainService {
     }
 
     this._http
-      .get(`${this.api}api/todo/`, { params, headers })
+      .get(`${this.api}api/todo/`, { params, headers: this.headers })
       .map((obj: any) => {
         if (this.entriesPerPage) {
           return obj.results.map(el => new ToDo(el.pk, el.content, el.completed));
@@ -78,7 +85,7 @@ export class MainService {
   }
 
   removeEntry(pk: number) {
-    return this._http.delete(`${this.api}api/todo/${pk}/delete/`, { headers: this.headers })
+    return this._http.delete(`${this.apiRoot}${pk}/delete/`, { headers: this.headers })
       .subscribe(
         result => {
           this.getData();
@@ -91,7 +98,7 @@ export class MainService {
     const body = {
       content: content
     };
-    return this._http.post(`${this.api}api/todo/create/`, body, { headers: this.headers })
+    return this._http.post(`${this.apiRoot}create/`, body, { headers: this.headers })
       .subscribe((data: any) => {
         this.getData();
       },
@@ -104,11 +111,22 @@ export class MainService {
       content: content,
       completed: completed
     };
-    return this._http.put(`${this.api}api/todo/${pk}/edit/`, body, { headers: this.headers })
+    return this._http.put(`${this.apiRoot}${pk}/edit/`, body, { headers: this.headers })
       .subscribe((data: any) => {
-        this.getData();
+        // this.getData();
+        this.updateEntry(data);
+        // console.log(data);
       },
         err => console.log(err)
       );
+  }
+
+  updateEntry(entry: any) {
+    this.toDos.filter((x: ToDo) => {
+      if (x.id === entry.pk) {
+        x.completed = entry.completed;
+      }
+    });
+    this.toDos$.next(this.toDos);
   }
 }

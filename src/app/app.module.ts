@@ -8,7 +8,7 @@ import { MainService } from './_services/main.service';
 import { UserService } from './_services/user.service';
 
 // used to create fake backend
-import { fakeBackendProvider } from './_helpers/fake-backend';
+// import { fakeBackendProvider } from './_helpers/fake-backend';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { BaseRequestOptions } from '@angular/http';
 
@@ -23,7 +23,10 @@ import { OnyLoggedInUsersGuard } from './_guards/auth.guard';
 import { RoutingModule } from './app.routing';
 import { AuthenticationService } from './_services/authentication.service';
 import { SearchService } from './_services/search.service';
-import { PaginationComponent } from './list/pagination/pagination.component';
+import { HeaderComponent } from './header/header.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ClickOutsideDirective } from './_directives/click-outside.directive';
+// import { PaginationComponent } from './list/pagination/pagination.component';
 // import { PaginationService } from './list/pagination/pagination.service';
 
 @NgModule({
@@ -33,10 +36,13 @@ import { PaginationComponent } from './list/pagination/pagination.component';
     FormComponent,
     TodoItemComponent,
     LoginComponent,
-    PaginationComponent
+    HeaderComponent,
+    ClickOutsideDirective
+    // PaginationComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
     HttpClientModule,
     FormsModule,
@@ -54,7 +60,7 @@ import { PaginationComponent } from './list/pagination/pagination.component';
 
     AuthenticationService,
     // providers used to create fake backend
-    fakeBackendProvider,
+    // fakeBackendProvider,
     MockBackend,
     BaseRequestOptions
   ],

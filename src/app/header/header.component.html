@@ -1,0 +1,32 @@
+<div class="nav">
+  <h1>
+    todoMachine
+  </h1>
+  <button (click)="toggleMenu()" class="navbar-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</div>
+
+
+<div class="navbar menu" (swiperight)="toggleMenu()" [ngClass]="{'open': menu}">
+  <ul class="list-unstyled">
+    <li>
+      about author
+    </li>
+    <li>
+      webpage
+    </li>
+    <li (tap)="clearCompleted()">
+      clear completed
+    </li>
+    <li>
+      check all
+    </li>
+    <li (tap)="logOut()">log out</li>
+    <li class="credits">
+      uncheck all
+    </li>
+  </ul>
+</div>

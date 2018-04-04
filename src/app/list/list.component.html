@@ -1,23 +1,23 @@
-<h1>todo tastks</h1>
-<app-form></app-form>
-
+<label class="search-label">search toDo</label>
 <div class="form-group">
   <input type="search" class="form-control" placeholder="search" value="" [formControl]="searchField">
-  <select #rere (change)="ItemsPerPage(rere.value)" class="form-control">
+  <!-- <select #rere (change)="ItemsPerPage(rere.value)" class="form-control">
     <option value="">all</option>
     <ng-container *ngFor="let p of entriesPerPageOptions">
       <option value="{{p.value}}">{{p.value}}</option>
     </ng-container>
-  </select>
+  </select> -->
 </div>
 
-<app-todo-item *ngFor="let todo of toDosList; trackBy: todo" [todo]="todo"></app-todo-item>
-<app-pagination></app-pagination>
+<label>in progress</label>
+<!-- <div [@listIn]="toDosListLength"> -->
+  <app-todo-item *ngFor="let todo of toDosList; trackBy:trackTodo" [todo]="todo"></app-todo-item>
+<!-- </div> -->
 
-<button class="btn btn-danger" (click)="clearCompleted()">
-  clear completed
-</button>
 
-<p>
-  <a [routerLink]="['/login']">Logout</a>
-</p>
+<label>completed</label>
+<!-- <div [@listIn]="toDosListCompletedLength"> -->
+  <app-todo-item *ngFor="let todo of toDosListCompleted; trackBy:trackTodo" [todo]="todo"></app-todo-item>
+<!-- </div> -->
+
+<app-form></app-form>

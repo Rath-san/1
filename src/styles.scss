@@ -1,2 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
-@import "assets/scss/styles"
+@import "assets/scss/styles";
+
+html, body {
+  // height: 100%;
+}
+
+body {
+  padding-top: 6rem;
+  padding-bottom: 12rem;
+  background: linear-gradient(to top, #ffffff 0%, #8d8d8d 150%) no-repeat bottom;
+  background-size: cover;
+}
+
+label {
+  justify-items: auto;
+  font-size: 12px;
+}
+
+.form-control {
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  outline: none;
+
+  &:focus {
+    border-color: transparent;
+  }
+}

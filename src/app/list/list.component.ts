@@ -5,16 +5,51 @@ import { SearchService } from '../_services/search.service';
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import { AuthenticationService } from '../_services/authentication.service';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  query,
+  stagger
+} from '@angular/animations';
 
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
+  animations: [
+    // trigger('listIn', [
+    //   transition('* => *', [
+    //     query('app-todo-item', style({
+    //       opacity: 0,
+    //       transform: 'translateY(100%)'
+    //     }), { optional: true }),
+    //     query('app-todo-item',
+    //       stagger('50ms ease-in-out', [
+    //         animate('250ms ease-in-out', style({
+    //           opacity: 1,
+    //           transform: 'translateY(0)'
+    //         }))
+    //       ]), { optional: true })
+    //   ])
+    // ])
+    // trigger('swapIn', [
+    //   transition('*=>*', style({
+    //     tr
+    //   }))
+    // ])
+  ]
 })
 export class ListComponent implements OnInit {
+
   toDosList: ToDo[];
-  toDosListLength;
+  toDosListCompleted: ToDo[];
+  toDosListLength = 0;
+  toDosListCompletedLength = 0;
 
   searchField: FormControl;
 
@@ -27,7 +62,8 @@ export class ListComponent implements OnInit {
 
   constructor(
     private _mainService: MainService,
-    private _searchService: SearchService
+    private _searchService: SearchService,
+    private _authService: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -38,26 +74,36 @@ export class ListComponent implements OnInit {
     this.searchField.valueChanges
       .debounceTime(400)
       .distinctUntilChanged()
-      .subscribe(query => {
-        this._searchService.query = query;
+      .subscribe(querySearch => {
+        this._searchService.query = querySearch;
         this._mainService.getData();
       });
   }
 
-  clearCompleted() {
-    this._mainService.clearToDos();
-    this.getData();
-  }
+  // clearCompleted() {
+  //   this._mainService.clearToDos();
+  //   this.getData();
+  // }
 
   getData() {
     this._mainService.toDos$.subscribe((data: ToDo[]) => {
-      this.toDosList = data;
-      this.toDosListLength = data.length;
+      const progress = data.filter((d: ToDo) => !d.completed);
+      const completed = data.filter((d: ToDo) => d.completed);
+
+      this.toDosList = progress;
+      this.toDosListCompleted = completed;
+
+      this.toDosListLength = progress.length;
+      this.toDosListCompletedLength = completed.length;
     });
   }
 
   ItemsPerPage(entriesPerPage: number) {
     this._mainService.entriesPerPage = entriesPerPage;
     this._mainService.getData();
+  }
+
+  trackTodo(index, item) {
+    return item.id;
   }
 }

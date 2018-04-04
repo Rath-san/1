@@ -1,8 +1,29 @@
 :host {
-    display: grid;
-    grid-auto-columns: 50%;
-    justify-content: center;
-    > * {
-        justify-self: center
-    }
+  display: grid;
+  justify-content: center; // > * {
+  //     // justify-self: center
+  // }
+}
+
+label {
+  margin-top: 1.5rem;
+}
+
+.search-label {
+  margin-top: 0;
+}
+
+input {
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: transparent;
+  color: snow;
+
+  &:focus {
+    background-color: transparent;
+    box-shadow: 0px 9px 15px 0px rgba(0, 0, 0, 0.15);
+    border-color: white;
+    color: white;
+  }
 }

@@ -1,9 +1,4 @@
 :host {
-  display: grid;
-  grid-auto-columns: 50%;
-  justify-content: center;
-
-  > * {
-    justify-self: center;
-  }
+  display: flex;
+  flex-direction: column;
 }
