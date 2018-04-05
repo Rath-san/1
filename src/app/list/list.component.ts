@@ -22,26 +22,21 @@ import {
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
   animations: [
-    // trigger('listIn', [
-    //   transition('* => *', [
-    //     query('app-todo-item', style({
-    //       opacity: 0,
-    //       transform: 'translateY(100%)'
-    //     }), { optional: true }),
-    //     query('app-todo-item',
-    //       stagger('50ms ease-in-out', [
-    //         animate('250ms ease-in-out', style({
-    //           opacity: 1,
-    //           transform: 'translateY(0)'
-    //         }))
-    //       ]), { optional: true })
-    //   ])
-    // ])
-    // trigger('swapIn', [
-    //   transition('*=>*', style({
-    //     tr
-    //   }))
-    // ])
+    trigger('listIn', [
+      transition('* => *', [
+        query('app-todo-item', style({
+          opacity: 0,
+          transform: 'translateY(100%)'
+        }), { optional: true }),
+        query('app-todo-item',
+          stagger('50ms ease-in-out', [
+            animate('250ms ease-in-out', style({
+              opacity: 1,
+              transform: 'translateY(0)'
+            }))
+          ]), { optional: true })
+      ])
+    ])
   ]
 })
 export class ListComponent implements OnInit {
@@ -103,7 +98,5 @@ export class ListComponent implements OnInit {
     this._mainService.getData();
   }
 
-  trackTodo(index, item) {
-    return item.id;
-  }
+  trackTodo = (idx, itm) => itm.id;
 }

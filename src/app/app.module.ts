@@ -28,6 +28,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClickOutsideDirective } from './_directives/click-outside.directive';
 // import { PaginationComponent } from './list/pagination/pagination.component';
 // import { PaginationService } from './list/pagination/pagination.service';
+import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+
+export class CustomHammerConfig extends HammerGestureConfig  {
+    overrides = <any>{
+        'pinch': { enable: false },
+        'rotate': { enable: false }
+    }
+}
 
 @NgModule({
   declarations: [
@@ -50,7 +58,10 @@ import { ClickOutsideDirective } from './_directives/click-outside.directive';
     RoutingModule
   ],
   providers: [
-
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: CustomHammerConfig
+    },
     MainService,
     UserService,
     SearchService,

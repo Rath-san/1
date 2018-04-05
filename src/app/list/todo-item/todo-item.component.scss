@@ -38,7 +38,7 @@
   border-radius: 5px;
   transition: box-shadow 100ms ease-in-out;
   outline: none;
-  transition: all 100ms ease-in;
+  // transition: all 100ms ease-in;
 
   input {
     padding: 16px;
@@ -68,4 +68,8 @@
 .accept {
   position: absolute;
   right: 0;
+}
+
+.animating {
+  transition: transform 100ms ease-in-out;
 }

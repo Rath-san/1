@@ -1,4 +1,5 @@
-<div class="content" [style.transform]="contentPosition">
+<div class="content" (@paning.done)="resetPan()" [@paning]="contentAnimationState" #contentWrapper [style.transform]="contentPosition">
+
   <input (tap)="todo.edit = true" (pan)="widthChange($event)" (panend)="panEnd($event)" id="contentInput" type="text" #editInput value="{{ todo.content }}"
     [readonly]="!todo.edit"
     (press)="todo.edit = true"
@@ -13,7 +14,7 @@
 </svg>
 </button>
 
-<button [style.opacity]="opacityNegative" (tap)="editTodo(editInput.value, todo.id, !todo.completed)" class="btn accept">
+<button [style.opacity]="opacityNegative" class="btn accept">
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21px" height="15px">
   <path fill-rule="evenodd" fill="red" d="M19.960,2.732 L9.246,13.446 C9.191,13.633 9.107,13.813 8.960,13.960 C8.697,14.223 8.344,14.322 8.000,14.288 C7.656,14.322 7.303,14.223 7.040,13.960 C6.893,13.813 6.809,13.633 6.754,13.446 L1.040,7.732 C0.573,7.265 0.573,6.507 1.040,6.040 C1.507,5.573 2.265,5.573 2.732,6.040 L8.000,11.308 L18.268,1.040 C18.735,0.573 19.493,0.573 19.960,1.040 C20.427,1.507 20.427,2.265 19.960,2.732 Z"
   />

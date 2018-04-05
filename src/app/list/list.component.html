@@ -11,13 +11,13 @@
 
 <label>in progress</label>
 <!-- <div [@listIn]="toDosListLength"> -->
-  <app-todo-item *ngFor="let todo of toDosList; trackBy:trackTodo" [todo]="todo"></app-todo-item>
+  <app-todo-item *ngFor="let todo of toDosList; trackBy: trackTodo" [todo]="todo"></app-todo-item>
 <!-- </div> -->
 
 
 <label>completed</label>
 <!-- <div [@listIn]="toDosListCompletedLength"> -->
-  <app-todo-item *ngFor="let todo of toDosListCompleted; trackBy:trackTodo" [todo]="todo"></app-todo-item>
+  <app-todo-item *ngFor="let todo of toDosListCompleted; trackBy: trackTodo" [todo]="todo"></app-todo-item>
 <!-- </div> -->
 
 <app-form></app-form>
