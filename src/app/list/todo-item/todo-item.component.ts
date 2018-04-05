@@ -18,16 +18,16 @@ import {
   animations: [
     trigger('paning', [
       state('panCenter', style({
-        transform: `none`
+        transform: `none`,
+        height: '*'
       })),
       state('panLeft', style({
         transform: `translateX(-200%)`
       })),
       state('panRight', style({
-        transform: `translateX(100%)`
+        transform: `translateX(200%)`
       })),
-      transition('*=>*', animate('200ms ease-in')),
-      // transition('enter=>*', animate('200ms ease-in'))
+      transition('* => *', animate('200ms ease-in'))
     ])
   ]
 })
@@ -109,8 +109,6 @@ export class TodoItemComponent implements OnInit {
       // to left
       if (m.deltaX < 0) {
         if (m.deltaX < -100) {
-          console.log(2);
-          
           this.panLeft();
           this.editTodo(this.editInput.nativeElement.value, this.todo.id, !this.todo.completed);
         }

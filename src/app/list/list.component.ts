@@ -6,38 +6,15 @@ import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { AuthenticationService } from '../_services/authentication.service';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-  query,
-  stagger
-} from '@angular/animations';
+import { list, item, itemOut } from '../_animations/animations';
 
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
-  animations: [
-    trigger('listIn', [
-      transition('* => *', [
-        query('app-todo-item', style({
-          opacity: 0,
-          transform: 'translateY(100%)'
-        }), { optional: true }),
-        query('app-todo-item',
-          stagger('50ms ease-in-out', [
-            animate('250ms ease-in-out', style({
-              opacity: 1,
-              transform: 'translateY(0)'
-            }))
-          ]), { optional: true })
-      ])
-    ])
-  ]
+  animations: [list, item, itemOut]
+
 })
 export class ListComponent implements OnInit {
 
@@ -82,6 +59,7 @@ export class ListComponent implements OnInit {
 
   getData() {
     this._mainService.toDos$.subscribe((data: ToDo[]) => {
+
       const progress = data.filter((d: ToDo) => !d.completed);
       const completed = data.filter((d: ToDo) => d.completed);
 
@@ -90,6 +68,7 @@ export class ListComponent implements OnInit {
 
       this.toDosListLength = progress.length;
       this.toDosListCompletedLength = completed.length;
+
     });
   }
 
@@ -98,5 +77,8 @@ export class ListComponent implements OnInit {
     this._mainService.getData();
   }
 
-  trackTodo = (idx, itm) => itm.id;
+  trackTodo = (index, itm) => {
+    // console.log(itm.id);
+    return itm.id;
+  }
 }
