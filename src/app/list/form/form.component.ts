@@ -11,11 +11,15 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     trigger('fadeIn', [
       state('open', style({
         opacity: 1,
-        transform: 'translateY(0)'
+        transform: 'translateY(0)',
+        height: '*',
+        margin: '*'
       })),
       state('close', style({
         opacity: 0,
-        transform: 'translateY(100%)'
+        transform: 'translateY(100%)',
+        height: 0,
+        margin: 0
       })),
       transition('*=>*', animate('250ms ease-in-out'))
     ]),

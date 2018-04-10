@@ -1,22 +1,25 @@
-<label class="search-label">search toDo</label>
-<div class="form-group">
-  <input type="search" class="form-control" placeholder="search" value="" [formControl]="searchField">
-  <!-- <select #rere (change)="ItemsPerPage(rere.value)" class="form-control">
+<div class="list-wrapper">
+  <label class="search-label">search toDo</label>
+  <div class="form-group">
+    <input type="search" class="form-control" placeholder="search" value="" [formControl]="searchField">
+    <!-- <select #rere (change)="ItemsPerPage(rere.value)" class="form-control">
     <option value="">all</option>
     <ng-container *ngFor="let p of entriesPerPageOptions">
       <option value="{{p.value}}">{{p.value}}</option>
     </ng-container>
   </select> -->
+  </div>
+
+  <label>in progress</label>
+  <div @list>
+    <app-todo-item @item @out *ngFor="let todo of toDosList; let i=index; trackBy: trackTodo" [todo]="todo"></app-todo-item>
+  </div>
+
+  <label>completed</label>
+  <div @list>
+    <app-todo-item @item @out *ngFor="let todo of toDosListCompleted; trackBy: trackTodo" [todo]="todo"></app-todo-item>
+  </div>
 </div>
 
-<label>in progress</label>
-<div @list>
-  <app-todo-item @item @out *ngFor="let todo of toDosList; let i=index; trackBy: trackTodo" [todo]="todo"></app-todo-item>
-</div>
-
-<label>completed</label>
-<div @list>
-  <app-todo-item @item @out *ngFor="let todo of toDosListCompleted; trackBy: trackTodo" [todo]="todo"></app-todo-item>
-</div>
 
 <app-form></app-form>

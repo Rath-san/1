@@ -1,4 +1,7 @@
 :host {
+  height: calc(100vh - 95px)
+}
+.list-wrapper {
   display: grid;
   justify-content: center; // > * {
   //     // justify-self: center

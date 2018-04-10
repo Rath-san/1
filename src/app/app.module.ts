@@ -29,6 +29,7 @@ import { ClickOutsideDirective } from './_directives/click-outside.directive';
 // import { PaginationComponent } from './list/pagination/pagination.component';
 // import { PaginationService } from './list/pagination/pagination.service';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { BtnComponent } from './buttons/btn/btn.component';
 
 export class CustomHammerConfig extends HammerGestureConfig  {
     overrides = <any>{
@@ -45,7 +46,8 @@ export class CustomHammerConfig extends HammerGestureConfig  {
     TodoItemComponent,
     LoginComponent,
     HeaderComponent,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    BtnComponent
     // PaginationComponent
   ],
   imports: [

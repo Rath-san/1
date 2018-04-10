@@ -10,9 +10,9 @@
 </div>
 
 
-<div class="navbar menu" (swiperight)="toggleMenu()" [ngClass]="{'open': menu}">
+<div *ngIf="true" class="navbar menu" (swiperight)="toggleMenu()" [ngClass]="{'open': menu}">
   <ul class="list-unstyled">
-    <li>
+    <!-- <li>
       about author
     </li>
     <li>
@@ -23,7 +23,7 @@
     </li>
     <li>
       check all
-    </li>
+    </li> -->
     <li (tap)="logOut()">log out</li>
     <li class="credits">
       uncheck all

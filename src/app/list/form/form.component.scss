@@ -12,10 +12,6 @@
 
 .form-group {
   opacity: 0;
-
-  // position: absolute;
-  // bottom: 100%;
-  // width: 100%;
 }
 
 .btn-form-toggle {
@@ -34,11 +30,7 @@
   background-color: #8a8a8a;
 }
 
-.btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  padding: 7px;
+app-btn {
   z-index: -1;
   position: absolute;
   top: 10px;

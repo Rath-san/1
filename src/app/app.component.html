@@ -1,2 +1,5 @@
 <app-header></app-header>
-<router-outlet></router-outlet>
+<!-- <main [@routerAnim]="o.isActivated && o.activatedRoute.routeConfig.path"> -->
+<main [@outletAnim]="getState(o)">  
+  <router-outlet #o='outlet'></router-outlet>
+</main>

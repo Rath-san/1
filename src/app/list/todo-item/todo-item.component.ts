@@ -78,7 +78,6 @@ export class TodoItemComponent implements OnInit {
           this.opacityPositive = m.deltaX / 100;
         } else {
           this.opacityNegative = m.deltaX / -100;
-
         }
       }
     }

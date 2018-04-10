@@ -6,11 +6,11 @@ import { LoginComponent } from './login/login.component';
 import { OnyLoggedInUsersGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'todos', component: ListComponent, canActivate: [OnyLoggedInUsersGuard] },
   { path: '', redirectTo: 'todos', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  { path: 'todos', component: ListComponent, data: { state: 'todos' }, canActivate: [OnyLoggedInUsersGuard] },
+  { path: 'login', component: LoginComponent, data: { state: 'login' } },
 
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
